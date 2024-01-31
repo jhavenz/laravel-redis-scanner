@@ -1,6 +1,5 @@
 <?php
 
-// config for Jhavenz/RedisScanner
 return [
-    'connection' => 'default',
+    'connection' => env('REDIS_SCANNER_CONNECTION', 'default'),
 ];
