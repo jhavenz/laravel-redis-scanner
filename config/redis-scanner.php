@@ -1,6 +1,6 @@
 <?php
 
-// config for Jhavenz/LaravelRedisScanner
+// config for Jhavenz/RedisScanner
 return [
-
+    'connection' => 'default',
 ];

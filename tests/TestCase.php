@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Jhavenz\\LaravelRedisScanner\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Jhavenz\\RedisScanner\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
