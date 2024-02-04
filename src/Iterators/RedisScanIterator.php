@@ -43,7 +43,14 @@ class RedisScanIterator implements IteratorAggregate
     {
         $this->bypass = true;
     }
-
+    
+    /**
+     * Redis scans can return keys that we've already iterated over.
+     * The $this->bypass is a way to check the $keys that were returned,
+     * and if they don't include what the caller is looking for, 'bypass'
+     * will skip over that set of keys altogether and move the cursor forward
+     * for the next set of keys.
+     */
     public function getIterator(): Traversable
     {
         $hasFilterApplied = isset($this->filterCallback);
