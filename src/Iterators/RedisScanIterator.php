@@ -43,7 +43,7 @@ class RedisScanIterator implements IteratorAggregate
     {
         $this->bypass = true;
     }
-    
+
     /**
      * Redis scans can return keys that we've already iterated over.
      * The $this->bypass is a way to check the $keys that were returned,
@@ -55,13 +55,14 @@ class RedisScanIterator implements IteratorAggregate
     {
         $hasFilterApplied = isset($this->filterCallback);
 
-        if (!$hasFilterApplied) {
+        if (! $hasFilterApplied) {
             $this->filterCallback = fn ($value, $key, $iterator) => true;
         }
 
         try {
             $total = 0;
             $cursor = '0';
+
             return new IteratorIterator(new CallbackFilterIterator((function () use (&$cursor, &$total) {
                 do {
                     [$cursor, $keys] = $this->redis()->scan(
@@ -82,6 +83,7 @@ class RedisScanIterator implements IteratorAggregate
 
                         if ($this->bypass) {
                             $this->bypass = false;
+
                             continue 2;
                         } elseif ($this->stop) {
                             break 2;
@@ -97,12 +99,12 @@ class RedisScanIterator implements IteratorAggregate
 
                         $this->cache[] = $key;
                     }
-                } while ($cursor !== '0' && $total < $this->limit && !$this->stop);
+                } while ($cursor !== '0' && $total < $this->limit && ! $this->stop);
             })(), $this->filterCallback));
         } finally {
             $this->cache = [];
 
-            if (!$hasFilterApplied) {
+            if (! $hasFilterApplied) {
                 unset($this->filterCallback);
             }
         }

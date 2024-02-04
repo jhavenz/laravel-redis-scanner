@@ -20,11 +20,11 @@ readonly class ScannedValue
 
     public function key(bool $prefixed = false): string
     {
-        if (!$prefixed) {
+        if (! $prefixed) {
             return Str::after($this->key, config('database.redis.options.prefix'));
         }
 
-        return Str::finish(config('database.redis.options.prefix'), '_') . $this->key;
+        return Str::finish(config('database.redis.options.prefix'), '_').$this->key;
     }
 
     public function cursor(): int

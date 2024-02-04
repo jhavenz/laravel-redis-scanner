@@ -29,6 +29,7 @@ class MapRedisScanIterator implements IteratorAggregate
 
             if (is_array($mapResult) && is_string($key = array_key_first($mapResult))) {
                 yield $key => $mapResult[$key];
+
                 continue;
             }
 
