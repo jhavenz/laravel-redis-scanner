@@ -2,8 +2,6 @@
 
 A simple package to iterate over Redis data without having to write out the manual looping logic every time.
 
-> Note: So far, this is just an idea for a package I've put together. It's not production ready
-
 ## Installation
 
 You can install the package via composer:
